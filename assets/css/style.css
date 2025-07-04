@@ -23,7 +23,7 @@ header img {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #00d1b2;
+  border: 3px solid #808080;
 }
 
 header h1 {
@@ -43,7 +43,7 @@ section {
 }
 
 h2 {
-  color: #00d1b2;
+  color: #808080;
   margin-bottom: 20px;
 }
 
@@ -70,7 +70,7 @@ h2 {
 
 .socials a {
   color: white;
-  background: #00d1b2;
+  background: #808080;
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 8px;
