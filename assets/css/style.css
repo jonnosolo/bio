@@ -155,7 +155,9 @@ h2 {
   color: #ccc;
   font-size: 0.95em;
 }
-
+.download-counts {
+  display: none; /* Will be toggled visible by JS */
+}
   footer {
     font-size: 0.8rem;
   }
