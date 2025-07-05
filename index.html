@@ -91,23 +91,36 @@
   </script>
 
   <script>
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
   function trackDownload(type) {
     const key = `${type}-count`;
     let count = localStorage.getItem(key);
     count = count ? parseInt(count) + 1 : 1;
     localStorage.setItem(key, count);
-    document.getElementById(`${type}-count`).textContent = count;
+    const el = document.getElementById(`${type}-count`);
+    if (el) el.textContent = count;
   }
 
   function loadDownloadCounts() {
-    ['portfolio', 'resume'].forEach(type => {
-      const key = `${type}-count`;
-      const count = localStorage.getItem(key) || 0;
-      document.getElementById(`${type}-count`).textContent = count;
-    });
+    const isAdmin = getQueryParam('admin') === 'true';
+    const counterSection = document.querySelector('.download-counts');
+
+    if (isAdmin) {
+      counterSection.style.display = 'block';
+      ['portfolio', 'resume'].forEach(type => {
+        const key = `${type}-count`;
+        const count = localStorage.getItem(key) || 0;
+        document.getElementById(`${type}-count`).textContent = count;
+      });
+    } else {
+      counterSection.style.display = 'none';
+    }
   }
 
-  // Load counts on page load
   window.onload = loadDownloadCounts;
 </script>
 </body>
