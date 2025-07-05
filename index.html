@@ -55,10 +55,21 @@
   </div>
 
   <section>
-  <h2>Portfolio</h2>
-  <p>You can view my portfolio below directly in-browser:</p>
-  <div class="pdf-container">
-    <iframe src="assets/docs/portfolio.pdf" frameborder="0"></iframe>
+  <h2>Downloads</h2>
+  <p>You can download my key documents below:</p>
+
+  <div class="downloads">
+    <a href="assets/docs/portfolio.pdf" download onclick="trackDownload('portfolio')" class="download-btn">
+      📁 Download Portfolio (PDF)
+    </a>
+    <a href="assets/docs/resume.pdf" download onclick="trackDownload('resume')" class="download-btn">
+      📄 Download Resume (PDF)
+    </a>
+  </div>
+
+  <div class="download-counts">
+    <p>Portfolio Downloads: <span id="portfolio-count">0</span></p>
+    <p>Resume Downloads: <span id="resume-count">0</span></p>
   </div>
 </section>
   
@@ -78,5 +89,26 @@
       document.getElementById("lightbox").style.display = "none";
     }
   </script>
+
+  <script>
+  function trackDownload(type) {
+    const key = `${type}-count`;
+    let count = localStorage.getItem(key);
+    count = count ? parseInt(count) + 1 : 1;
+    localStorage.setItem(key, count);
+    document.getElementById(`${type}-count`).textContent = count;
+  }
+
+  function loadDownloadCounts() {
+    ['portfolio', 'resume'].forEach(type => {
+      const key = `${type}-count`;
+      const count = localStorage.getItem(key) || 0;
+      document.getElementById(`${type}-count`).textContent = count;
+    });
+  }
+
+  // Load counts on page load
+  window.onload = loadDownloadCounts;
+</script>
 </body>
 </html>
